@@ -18,5 +18,13 @@ public class ChessManager : MonoBehaviour {
         _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN));
         Debug.Log("_boardText: " + _boardText.text);
     }
+
+    public void OnMoveTextSubmit() {
+        string enteredText = _moveInput.text;
+        Debug.Log("Submitted text: " + enteredText);
+
+        _moveInput.text = "";
+        // Add additional logic here for what happens when text is submitted
+    }
   
 }
