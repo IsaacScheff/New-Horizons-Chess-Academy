@@ -18,7 +18,12 @@ public class ChessManager : MonoBehaviour {
         _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN));
         Debug.Log("_boardText: " + _boardText.text);
     }
-
+    void Update() {
+        // Check if the input field is currently selected and the Enter key is pressed
+        if (_moveInput.text != "" && Input.GetKeyDown(KeyCode.Return)) {
+            OnMoveTextSubmit();
+        }
+    }
     public void OnMoveTextSubmit() {
         string enteredText = _moveInput.text;
         Debug.Log("Submitted text: " + enteredText);
