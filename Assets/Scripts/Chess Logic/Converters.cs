@@ -8,24 +8,19 @@ public class Converters : MonoBehaviour {
         string[] rows = fen.Split('/');
         char[][] board = new char[rows.Length][];
 
-        for (int i = 0; i < rows.Length; i++)
-        {
+        for (int i = 0; i < rows.Length; i++) {
             List<char> row = new List<char>();
             int j = 0;
 
-            while (j < rows[i].Length)
-            {
-                if (char.IsDigit(rows[i][j]))
-                {
+            while (j < rows[i].Length) {
+                if (char.IsDigit(rows[i][j])) {
                     int numBlanks = int.Parse(rows[i][j].ToString());
-                    for (int k = 0; k < numBlanks; k++)
-                    {
+                    for (int k = 0; k < numBlanks; k++) {
                         row.Add('-');
                     }
                     j++;
                 }
-                else
-                {
+                else {
                     row.Add(rows[i][j]);
                     j++;
                 }
@@ -34,19 +29,14 @@ public class Converters : MonoBehaviour {
         }
         return board;
     }
-
-    public static string BoardToString(char[][] board)
-    {
+    public static string BoardToString(char[][] board) {
         StringBuilder sb = new StringBuilder();
 
-        foreach (char[] row in board)
-        {
+        foreach (char[] row in board) {
             sb.Append("['");
-            for (int i = 0; i < row.Length; i++)
-            {
+            for (int i = 0; i < row.Length; i++) {
                 sb.Append(row[i]);
-                if (i < row.Length - 1)
-                {
+                if (i < row.Length - 1) {
                     sb.Append("', '");
                 }
             }
@@ -55,6 +45,4 @@ public class Converters : MonoBehaviour {
 
         return sb.ToString();
     }
-
-
 }
