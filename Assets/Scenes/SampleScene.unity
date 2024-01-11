@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c092ee55c491462fbcf24e917d30110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentFEN: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+  _currentFEN: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
   _textBoard: {fileID: 1700355455}
   _moveInput: {fileID: 1665577758}
 --- !u!4 &385656499

@@ -45,4 +45,10 @@ public class Converters : MonoBehaviour {
 
         return sb.ToString();
     }
+    public static int[] SquareToArray(string square) {
+        int rank = '8' - square[1];
+        int file = square[0] - 'a';
+        return new int[] { rank, file };
+    }
+
 }

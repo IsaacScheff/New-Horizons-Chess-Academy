@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class ChessManager : MonoBehaviour {
     public static ChessManager Instance { get; private set; }
-    [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    //[SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;
     private TextMeshProUGUI _boardText;
@@ -15,7 +17,7 @@ public class ChessManager : MonoBehaviour {
         Instance = this;
 
         _boardText = _textBoard.GetComponent<TextMeshProUGUI>();
-        _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN));
+        _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
         Debug.Log("_boardText: " + _boardText.text);
     }
     void Update() {
@@ -29,7 +31,8 @@ public class ChessManager : MonoBehaviour {
         Debug.Log("Submitted text: " + enteredText);
 
         _moveInput.text = "";
-        // Add additional logic here for what happens when text is submitted
+        
+        MoveValidator.ValidateMove(enteredText, _currentFEN);
     }
   
 }
