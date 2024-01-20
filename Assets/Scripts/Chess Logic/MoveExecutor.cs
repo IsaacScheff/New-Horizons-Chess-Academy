@@ -69,7 +69,9 @@ public class MoveExecutor : MonoBehaviour {
         switch (piece) { 
             case 'P':
                 if (endRank == 0) {
-                    board[endRank][endFile] = move.Length > 4 ? move[4].ToString().ToUpper()[0] : 'Q'; // Default to Queen if no promotion piece is specified
+                    board[endRank][endFile] = move.Length > 4 ? move[4].ToString().ToUpper()[0] : 'Q'; 
+                    /* Default to Queen if no promotion piece is specified, 
+                        although move validator does not currently allow this */
                 } else if (enPassantSquare == move.Substring(move.Length - 2)) {
                     board[endRank + 1][endFile] = '-';
                 }

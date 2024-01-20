@@ -35,9 +35,12 @@ public class MoveValidator : MonoBehaviour {
                 int endRank = endSquare[0];
                 char target = pieces[endRank][endFile];
 
-                if (endRank == (piece == 'P' ? 0 : 7) && move.Length != 5) {
+                if (endRank == (piece == 'P' ? 0 : 7) && (move.Length != 5 || !"bnrq".Contains(move[4].ToString().ToLower()))) {
+                    /* checking for promotino moves that a piece to promote to is provided 
+                        and that the provided piece is a valid choice of Bishop, Knight, Rook, or Queen */
                     return false;
                 }
+                
                 int direction = (piece == 'P') ? -1 : 1;
                 // Pawn moves forward one square or two if on starting square
                 if (startFile == endFile && target == '-' && 
@@ -92,7 +95,6 @@ public class MoveValidator : MonoBehaviour {
         Debug.Log("valid move");
         return true;
     }
-
     private static bool TargetCheck(int[] targetSquare, string color, char[][] pieces) {
         int targetRank = targetSquare[0];
         int targetFile = targetSquare[1];
