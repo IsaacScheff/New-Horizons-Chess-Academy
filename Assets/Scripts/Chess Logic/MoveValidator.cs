@@ -82,8 +82,8 @@ public class MoveValidator : MonoBehaviour {
                 return false; // Invalid piece
         }
         
-        // if (!TargetCheck(endSquare, playerTurn, pieces))
-        //     return false;
+        if (!TargetCheck(endSquare, playerTurn, pieces))
+            return false;
 
         // if (IsCheckAfterMove(move, fen))
         //     return false;
@@ -93,4 +93,21 @@ public class MoveValidator : MonoBehaviour {
         return true;
     }
 
+    private static bool TargetCheck(int[] targetSquare, string color, char[][] pieces) {
+        int targetRank = targetSquare[0];
+        int targetFile = targetSquare[1];
+        char targetPiece = pieces[targetRank][targetFile];
+
+        if (color == "b") {
+            if ("k,n,r,p,q,b".Contains(targetPiece)) {
+                return false;
+            }
+        }
+        else {
+            if ("K,N,R,P,Q,B".Contains(targetPiece)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
