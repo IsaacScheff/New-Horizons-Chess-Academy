@@ -30,7 +30,14 @@ public class ChessManager : MonoBehaviour {
 
         _moveInput.text = "";
         
-        MoveValidator.ValidateMove(enteredText, _currentFEN);
+        if(MoveValidator.ValidateMove(enteredText, _currentFEN)) {
+            Debug.Log(_currentFEN);
+            _currentFEN = MoveExecutor.ExecuteMove(enteredText, _currentFEN);
+            _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
+            Debug.Log(_currentFEN);
+        } else {
+            Debug.Log("Invalid move");
+        }
     }
   
 }

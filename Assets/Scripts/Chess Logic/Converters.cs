@@ -29,6 +29,33 @@ public class Converters : MonoBehaviour {
         }
         return board;
     }
+    public static string BoardToFen(char[][] board) {
+        string fen = "";
+        for (int i = 0; i < board.Length; i++) {
+            char[] row = board[i];
+            int numBlanks = 0;
+            for (int j = 0; j < row.Length; j++) {
+                char piece = row[j];
+                if (piece == '-') {
+                    numBlanks++;
+                } else {
+                    if (numBlanks > 0) {
+                        fen += numBlanks.ToString();
+                        numBlanks = 0;
+                    }
+                    fen += piece;
+                }
+            }
+            if (numBlanks > 0) {
+                fen += numBlanks.ToString();
+            }
+            if (i < board.Length - 1) {
+                fen += '/';
+            }
+        }
+        return fen;
+    }
+
     public static string BoardToString(char[][] board) {
         StringBuilder sb = new StringBuilder();
 
