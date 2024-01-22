@@ -73,9 +73,10 @@ public class Converters : MonoBehaviour {
         return sb.ToString();
     }
     public static int[] SquareToArray(string square) {
+        //Debug.Log($"square: {square}");
         int rank = '8' - square[1];
         int file = square[0] - 'a';
+        //Debug.Log($"rank: {rank} file: {file}");
         return new int[] { rank, file };
     }
-
 }

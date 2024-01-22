@@ -61,30 +61,70 @@ public class MoveValidator : MonoBehaviour {
                 }
                 return false;
             case 'r':
-                // ... (rook logic)
-                Debug.Log("rook move check");
+                if (!LineCertifier.StraightVerify(startSquare, endSquare))
+                    return false;
+                if (!PathValidator.IsPathClear(startSquare, endSquare, pieces))
+                    return false;
                 break;
             case 'n':
-                // ... (knight logic)
-                Debug.Log("knight move check");
+                int x1 = startSquare[0];
+                int y1 = startSquare[1];
+                int x2 = endSquare[0];
+                int y2 = endSquare[1];
+
+                int dx = Math.Abs(x2 - x1);
+                int dy = Math.Abs(y2 - y1);
+
+                if (!(dx == 1 && dy == 2) && !(dx == 2 && dy == 1))
+                    return false;
                 break;
             case 'b':
-                // ... (bishop logic)
-                Debug.Log("bishop move check");
+                if (!LineCertifier.DiagonalVerify(startSquare, endSquare))
+                    return false;
+                if (!PathValidator.IsDiagonalClear(startSquare, endSquare, pieces))
+                    return false;
                 break;
             case 'q':
-                // ... (queen logic)
-                Debug.Log("queen move check");
+                if (LineCertifier.StraightVerify(startSquare, endSquare)) {
+                    if (!PathValidator.IsPathClear(startSquare, endSquare, pieces))
+                        return false;
+                } else if (LineCertifier.DiagonalVerify(startSquare, endSquare)) {
+                    if (!PathValidator.IsDiagonalClear(startSquare, endSquare, pieces))
+                        return false;
+                } else {
+                    return false; // Neither straight nor diagonal, so invalid move for a queen
+                }
                 break;
             case 'k':
-                // ... (king logic, including castling)
-                Debug.Log("king move check");
+                // Check for castling
+                switch (move) {
+                    case "e1c1":
+                        if (castlingRights.Contains("K") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
+                            return true;
+                        else
+                            return false;
+                    case "e1g1":
+                        if (castlingRights.Contains("Q") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
+                            return true;
+                        else
+                            return false;
+                    case "e8c8":
+                        if (castlingRights.Contains("k") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
+                            return true;
+                        else
+                            return false;
+                    case "e8g8":
+                        if (castlingRights.Contains("q") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
+                            return true;
+                        else
+                            return false;
+                    default:
+                        break;
+                }
+                if (Math.Abs(startSquare[0] - endSquare[0]) > 1 || Math.Abs(startSquare[1] - endSquare[1]) > 1)
+                    return false;
                 break;
-            default:
-                Debug.Log("Invalid piece");
-                return false; // Invalid piece
         }
-        
         if (!TargetCheck(endSquare, playerTurn, pieces))
             return false;
 
@@ -92,7 +132,6 @@ public class MoveValidator : MonoBehaviour {
         //     return false;
 
         // All checks passed, move is valid
-        Debug.Log("valid move");
         return true;
     }
     private static bool TargetCheck(int[] targetSquare, string color, char[][] pieces) {
@@ -111,5 +150,8 @@ public class MoveValidator : MonoBehaviour {
             }
         }
         return true;
+    }
+    public static bool IsSquareOnBoard(int x, int y) {
+        return x >= 0 && x <= 7 && y >= 0 && y <= 7;
     }
 }

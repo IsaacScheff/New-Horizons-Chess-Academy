@@ -7,17 +7,18 @@ using UnityEngine;
     For instance, the difference between 'a' and 'b' is 1, which aligns with their positions on the chessboard
 */
 public class LineCertifier : MonoBehaviour {
-    public static bool StraightVerify(string startSquare, string endSquare) {
+    //public static bool StraightVerify(string startSquare, string endSquare) {
+    public static bool StraightVerify(int[] startSquare, int[] endSquare) {
         if (startSquare[0] == endSquare[0] || startSquare[1] == endSquare[1])
             return true;
         else
             return false;
     }
-    public bool DiagonalVerify(string startSquare, string endSquare) {
-        char startFile = startSquare[0];
-        char startRank = startSquare[1];
-        char endFile = endSquare[0];
-        char endRank = endSquare[1];
+    public static bool DiagonalVerify(int[] startSquare, int[] endSquare) {
+        int startFile = startSquare[0];
+        int startRank = startSquare[1];
+        int endFile = endSquare[0];
+        int endRank = endSquare[1];
 
         return Math.Abs(startFile - endFile) == Math.Abs(startRank - endRank);
     }
