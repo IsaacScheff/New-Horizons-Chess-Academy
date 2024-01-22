@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class PossibleMoves : MonoBehaviour {
     public static bool ValidKingMove(int[] kingPosition, string fen) {
         string startSquare = ((char)(kingPosition[1] + 'a')).ToString() + (8 - kingPosition[0]).ToString();
         string move;
