@@ -32,10 +32,9 @@ public class ChessManager : MonoBehaviour {
         
         if(MoveValidator.ValidateMove(enteredText, _currentFEN)) {
             _currentFEN = MoveExecutor.ExecuteMove(enteredText, _currentFEN);
-            _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
+            _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0])); 
         } else {
             Debug.Log("Invalid move");
         }
     }
-  
 }
