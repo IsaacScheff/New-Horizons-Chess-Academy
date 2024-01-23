@@ -128,8 +128,8 @@ public class MoveValidator : MonoBehaviour {
         if (!TargetCheck(endSquare, playerTurn, pieces))
             return false;
 
-        // if (IsCheckAfterMove(move, fen))
-        //     return false;
+        if (CheckValidator.IsCheckAfterMove(move, fen))
+            return false;
 
         // All checks passed, move is valid
         return true;
