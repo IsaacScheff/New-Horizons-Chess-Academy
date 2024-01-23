@@ -6,19 +6,27 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour {
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Transform _camera;
+    private Dictionary<string, Tile> _board;
     void Start() {
         GenerateBoard();
     }
     void GenerateBoard() {
+        _board = new Dictionary<string, Tile>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8 ; j++) {
                 var tile = Instantiate(_tilePrefab, new Vector3(i, j, 0), Quaternion.identity);
-                tile.name = "Tile " + i + " " + j;
+                tile.name = $"{Convert.ToChar('a' + i)}{j + 1}";
 
                 var isOffSet = i % 2 != j % 2;
                 tile.SetColor(isOffSet);
+
+                _board.Add(tile.name, tile);
             }
         }
         _camera.transform.position = new Vector3(3.5f, 3.5f, -10);
+    }
+
+    public Tile GetTile(string tileName) {
+        return _board[tileName];
     }
 }
