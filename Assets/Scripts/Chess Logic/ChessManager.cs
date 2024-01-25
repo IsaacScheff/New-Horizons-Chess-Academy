@@ -8,15 +8,17 @@ using UnityEngine.UI;
 public class ChessManager : MonoBehaviour {
     public static ChessManager Instance { get; private set; }
     [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    public string CurrentFEN { get { return _currentFEN; } }
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;
     private TextMeshProUGUI _boardText;
     void Awake() {
         Instance = this;
 
-        _boardText = _textBoard.GetComponent<TextMeshProUGUI>();
-        _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
-        Debug.Log("_boardText: " + _boardText.text);
+        //BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+        //_boardText = _textBoard.GetComponent<TextMeshProUGUI>();
+        //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
+        //Debug.Log("_boardText: " + _boardText.text);
     }
     void Update() {
         // Check if the input field is currently selected and the Enter key is pressed
@@ -32,7 +34,8 @@ public class ChessManager : MonoBehaviour {
         
         if(MoveValidator.ValidateMove(enteredText, _currentFEN)) {
             _currentFEN = MoveExecutor.ExecuteMove(enteredText, _currentFEN);
-            _boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0])); 
+            //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0])); 
+            BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
         } else {
             Debug.Log("Invalid move");
         }

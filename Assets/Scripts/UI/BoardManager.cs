@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour {
+    public static BoardManager Instance { get; private set; }
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Transform _camera;
     private Dictionary<string, Tile> _board;
     void Start() {
+        Instance = this;
         GenerateBoard();
+        UpdateBoardFromFen(ChessManager.Instance.CurrentFEN.Split(' ')[0]);
     }
     void GenerateBoard() {
         _board = new Dictionary<string, Tile>();
@@ -28,5 +31,20 @@ public class BoardManager : MonoBehaviour {
 
     public Tile GetTile(string tileName) {
         return _board[tileName];
+    }
+    public void UpdateBoardFromFen(string fen) {
+        char[][] boardArray = Converters.FenToBoard(fen);
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                char fenChar = boardArray[i][j];
+                Tile.PieceType pieceType = Converters.FenCharToPieceType(fenChar);
+
+                string tileName = $"{Convert.ToChar('a' + j)}{8 - i}";
+                if (_board.ContainsKey(tileName)) {
+                    _board[tileName].SetPiece(pieceType);
+                }
+            }
+        }
     }
 }

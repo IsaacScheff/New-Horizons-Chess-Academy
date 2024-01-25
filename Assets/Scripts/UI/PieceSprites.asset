@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bed250a3b0d1443085a712bcc514d07, type: 3}
+  m_Name: PieceSprites
+  m_EditorClassIdentifier: 
+  pawnSprite: {fileID: -110739604, guid: 30535d99f650f496481179416a823d46, type: 3}
+  knightSprite: {fileID: -1758962007, guid: 30535d99f650f496481179416a823d46, type: 3}
+  bishopSprite: {fileID: 1764832385, guid: 30535d99f650f496481179416a823d46, type: 3}
+  rookSprite: {fileID: -2090910105, guid: 30535d99f650f496481179416a823d46, type: 3}
+  queenSprite: {fileID: 1103142049, guid: 30535d99f650f496481179416a823d46, type: 3}
+  kingSprite: {fileID: -240638682, guid: 30535d99f650f496481179416a823d46, type: 3}
+  pawnBlackSprite: {fileID: 850464060, guid: 30535d99f650f496481179416a823d46, type: 3}
+  knightBlackSprite: {fileID: -388215900, guid: 30535d99f650f496481179416a823d46, type: 3}
+  bishopBlackSprite: {fileID: -1962224264, guid: 30535d99f650f496481179416a823d46, type: 3}
+  rookBlackSprite: {fileID: -236905808, guid: 30535d99f650f496481179416a823d46, type: 3}
+  queenBlackSprite: {fileID: 263980705, guid: 30535d99f650f496481179416a823d46, type: 3}
+  kingBlackSprite: {fileID: 1683563218, guid: 30535d99f650f496481179416a823d46, type: 3}

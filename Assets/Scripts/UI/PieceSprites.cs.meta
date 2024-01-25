@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 8bed250a3b0d1443085a712bcc514d07
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pawnSprite: {fileID: -110739604, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - knightSprite: {fileID: -1758962007, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - bishopSprite: {fileID: 1764832385, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - rookSprite: {fileID: -2090910105, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - queenSprite: {fileID: 1103142049, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - kingSprite: {fileID: -240638682, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - pawnBlackSprite: {fileID: 850464060, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - knightBlackSprite: {fileID: -388215900, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - bishopBlackSprite: {fileID: -1962224264, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - rookBlackSprite: {fileID: -236905808, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - queenBlackSprite: {fileID: 263980705, guid: 30535d99f650f496481179416a823d46, type: 3}
+  - kingBlackSprite: {fileID: 1683563218, guid: 30535d99f650f496481179416a823d46, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

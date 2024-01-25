@@ -77,4 +77,21 @@ public class Converters : MonoBehaviour {
         int file = square[0] - 'a';
         return new int[] { rank, file };
     }
+    public static Tile.PieceType FenCharToPieceType(char fenChar) {
+        switch (fenChar) {
+            case 'p': return Tile.PieceType.PawnBlack;
+            case 'r': return Tile.PieceType.RookBlack;
+            case 'n': return Tile.PieceType.KnightBlack;
+            case 'b': return Tile.PieceType.BishopBlack;
+            case 'q': return Tile.PieceType.QueenBlack;
+            case 'k': return Tile.PieceType.KingBlack;
+            case 'P': return Tile.PieceType.Pawn;
+            case 'R': return Tile.PieceType.Rook;
+            case 'N': return Tile.PieceType.Knight;
+            case 'B': return Tile.PieceType.Bishop;
+            case 'Q': return Tile.PieceType.Queen;
+            case 'K': return Tile.PieceType.King;
+            default:  return Tile.PieceType.None;
+        }
+    }
 }
