@@ -4,6 +4,8 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Color _light, _dark;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private GameObject _highlight;
+    [SerializeField] private GameObject _possibleMove;
+    public bool IsPossibleMove { get { return _possibleMove.activeSelf; } }
     [SerializeField] private SpriteRenderer _pieceRenderer; // Renderer for the piece sprite
     [SerializeField] private PieceSprites pieceSprites; // Scriptable object with all the piece sprites
 
@@ -34,17 +36,20 @@ public class Tile : MonoBehaviour {
         // Set the local scale to 1/4 of the original size
         _pieceRenderer.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
     }
-
     void OnMouseEnter() {
         _highlight.SetActive(true);
     }
-
     void OnMouseExit() {
         _highlight.SetActive(false);
     }
-
     void OnMouseDown() {
         BoardManager.Instance.TileClicked(name);
+    }
+    public void HighlightPossibleMove() {
+        _possibleMove.SetActive(true);
+    }
+    public void ClearPossibleMove() {
+        _possibleMove.SetActive(false);
     }
 
     public void SetPiece(PieceType newPiece) {

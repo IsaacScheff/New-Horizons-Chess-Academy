@@ -50,7 +50,6 @@ public class PossibleMoves : MonoBehaviour {
                 }
             }
         }
-
         // Horizontal moves
         for (int x = 0; x < 8; x++) {
             if (rookPosition[1] != x) {
@@ -60,7 +59,6 @@ public class PossibleMoves : MonoBehaviour {
                 }
             }
         }
-
         return false;
     }
 

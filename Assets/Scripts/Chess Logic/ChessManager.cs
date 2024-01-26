@@ -12,11 +12,12 @@ public class ChessManager : MonoBehaviour {
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;
     [SerializeField] private bool _playerIsWhite;
-    public string PlayerColor { get { return _playerIsWhite ? "White" : "Black"; } }
+    public bool IsPlayerWhite { get { return _playerIsWhite; } }
     private TextMeshProUGUI _boardText;
     void Awake() {
         Instance = this;
-
+        
+        _playerIsWhite = true; //for testing
         //_boardText = _textBoard.GetComponent<TextMeshProUGUI>();
         //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
         //Debug.Log("_boardText: " + _boardText.text);
@@ -36,6 +37,18 @@ public class ChessManager : MonoBehaviour {
         if(MoveValidator.ValidateMove(enteredText, _currentFEN)) {
             _currentFEN = MoveExecutor.ExecuteMove(enteredText, _currentFEN);
             //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0])); 
+            BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+        } else {
+            Debug.Log("Invalid move");
+        }
+    }
+    //these functions will be largely the same, will refactor later
+    public void OnMoveUISubmit(string move) {
+        if(GameManager.Instance.SinglePlayerGame) {
+            _playerIsWhite = !_playerIsWhite;
+        }
+        if(MoveValidator.ValidateMove(move, _currentFEN)) { //should already be validated
+            _currentFEN = MoveExecutor.ExecuteMove(move, _currentFEN);
             BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
         } else {
             Debug.Log("Invalid move");

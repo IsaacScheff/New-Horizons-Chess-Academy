@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour {
     public static BoardManager Instance { get; private set; }
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Transform _camera;
-    private Dictionary<string, Tile> _board;
+    private Dictionary<string, Tile> _board; 
+    private string _activeTile;
     void Start() {
         Instance = this;
         GenerateBoard();
@@ -50,16 +52,45 @@ public class BoardManager : MonoBehaviour {
 
     public void TileClicked(string tileName) {
         Debug.Log("Clicked on tile: " + tileName);
-        if((ChessManager.Instance.PlayerColor == "White" && ChessManager.Instance.CurrentFEN.Split(' ')[1] == "w") ||
-            (ChessManager.Instance.PlayerColor == "Black" && ChessManager.Instance.CurrentFEN.Split(' ')[1] == "b")
+        if((ChessManager.Instance.IsPlayerWhite && ChessManager.Instance.CurrentFEN.Split(' ')[1] != "w") ||
+            (!ChessManager.Instance.IsPlayerWhite && ChessManager.Instance.CurrentFEN.Split(' ')[1] != "b")
         ) {
-            if(GetTile(tileName).CurrentPiece != Tile.PieceType.None) {
-                Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
-            } else {
-                Debug.Log("No piece on tile");
-            }
-        } else {
-            Debug.Log("Opponent turn");
+            Debug.Log("Not your turn");
+            return;
         }
+        //check here for tile having possible move set to active, if so execute move
+        if(_board[tileName].IsPossibleMove) {
+            string move = _activeTile + tileName;
+            ChessManager.Instance.OnMoveUISubmit(move);
+            ClearPossibleMoves();
+            return;
+        }
+
+        if(ChessManager.Instance.IsPlayerWhite == GetTile(tileName).IsPieceWhite()) {
+            Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
+            ShowPossibleMoves(tileName, ChessManager.Instance.CurrentFEN); 
+            _activeTile = tileName;
+        } else {
+            Debug.Log("Not your piece");
+        }
+    }
+
+    private void ShowPossibleMoves(string startTile, string fen) {
+        foreach (KeyValuePair<string, Tile> tileEntry in _board) {
+            string targetTileName = tileEntry.Key; // Name of the target tile
+            string move = startTile + targetTileName; // Concatenate to form a move string
+
+            if (MoveValidator.ValidateMove(move, fen)) {
+                // This is a valid move - you can do something with this information
+                Debug.Log("Valid move: " + move);
+                tileEntry.Value.HighlightPossibleMove();
+            }
+        }
+    }
+    private void ClearPossibleMoves() {
+        foreach (KeyValuePair<string, Tile> tileEntry in _board) {
+            tileEntry.Value.ClearPossibleMove();
+        }
+        _activeTile = null;
     }
 }

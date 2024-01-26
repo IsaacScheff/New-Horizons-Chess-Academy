@@ -52,7 +52,7 @@ public class MoveValidator : MonoBehaviour {
                 // Pawn takes diagonally
                 if (endRank - startRank == direction && Math.Abs(endFile - startFile) == 1) {
                     if (enPassantSquare != "-") {
-                        if (target == pieces[8 - enPassantSquare[1]][enPassantSquare[0] - 'a']) {
+                        if (target == pieces[8 - enPassantSquare[1]][enPassantSquare[0] - 'a']) { //looks like bug here
                             break;
                         }
                     }
