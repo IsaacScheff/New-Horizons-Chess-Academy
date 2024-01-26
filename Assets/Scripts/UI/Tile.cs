@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour {
     private PieceType _currentPiece = PieceType.None;
 
     public void SetColor(bool isOffSet) {
-        _spriteRenderer.color = isOffSet ? _dark : _light;
+        _spriteRenderer.color = isOffSet ? _light : _dark;
     }
     private void ResizePieceSprite() {
         // Set the local scale to 1/4 of the original size
@@ -40,6 +40,10 @@ public class Tile : MonoBehaviour {
 
     void OnMouseExit() {
         _highlight.SetActive(false);
+    }
+
+    void OnMouseDown() {
+        Debug.Log("Clicked on tile: " + name);
     }
 
     public void SetPiece(PieceType newPiece) {

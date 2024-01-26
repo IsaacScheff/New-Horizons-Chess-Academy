@@ -15,7 +15,6 @@ public class ChessManager : MonoBehaviour {
     void Awake() {
         Instance = this;
 
-        //BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
         //_boardText = _textBoard.GetComponent<TextMeshProUGUI>();
         //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
         //Debug.Log("_boardText: " + _boardText.text);
