@@ -11,6 +11,8 @@ public class ChessManager : MonoBehaviour {
     public string CurrentFEN { get { return _currentFEN; } }
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;
+    [SerializeField] private bool _playerIsWhite;
+    public string PlayerColor { get { return _playerIsWhite ? "White" : "Black"; } }
     private TextMeshProUGUI _boardText;
     void Awake() {
         Instance = this;

@@ -25,6 +25,7 @@ public class Tile : MonoBehaviour {
     }
 
     private PieceType _currentPiece = PieceType.None;
+    public PieceType CurrentPiece { get { return _currentPiece; } }
 
     public void SetColor(bool isOffSet) {
         _spriteRenderer.color = isOffSet ? _light : _dark;
@@ -43,7 +44,7 @@ public class Tile : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        Debug.Log("Clicked on tile: " + name);
+        BoardManager.Instance.TileClicked(name);
     }
 
     public void SetPiece(PieceType newPiece) {
@@ -94,6 +95,12 @@ public class Tile : MonoBehaviour {
                 _pieceRenderer.sprite = null; // No sprite for empty tile
                 break;
         }
+    }
+    public bool IsPieceBlack() {
+        return _currentPiece.ToString().EndsWith("Black");
+    }
+    public bool IsPieceWhite() {
+        return _currentPiece != PieceType.None && !IsPieceBlack();
     }
 }
 

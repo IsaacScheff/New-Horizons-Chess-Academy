@@ -47,4 +47,19 @@ public class BoardManager : MonoBehaviour {
             }
         }
     }
+
+    public void TileClicked(string tileName) {
+        Debug.Log("Clicked on tile: " + tileName);
+        if((ChessManager.Instance.PlayerColor == "White" && ChessManager.Instance.CurrentFEN.Split(' ')[1] == "w") ||
+            (ChessManager.Instance.PlayerColor == "Black" && ChessManager.Instance.CurrentFEN.Split(' ')[1] == "b")
+        ) {
+            if(GetTile(tileName).CurrentPiece != Tile.PieceType.None) {
+                Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
+            } else {
+                Debug.Log("No piece on tile");
+            }
+        } else {
+            Debug.Log("Opponent turn");
+        }
+    }
 }
