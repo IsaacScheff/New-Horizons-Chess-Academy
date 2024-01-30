@@ -51,12 +51,13 @@ public class MoveValidator : MonoBehaviour {
                 }
                 // Pawn takes diagonally
                 if (endRank - startRank == direction && Math.Abs(endFile - startFile) == 1) {
-                    if (enPassantSquare != "-" && enPassantSquare[0] == endFile + 'a' && enPassantSquare[1] == 8 - endRank + '0') {
-                        if (target == pieces[8 - (enPassantSquare[1] - '0')][enPassantSquare[0] - 'a']) { 
+                    if (enPassantSquare != "-" && 
+                        enPassantSquare[0] == endFile + 'a' && 
+                        enPassantSquare[1] == 8 - endRank + '0' &&
+                        target == pieces[8 - (enPassantSquare[1] - '0')][enPassantSquare[0] - 'a']
+                        ) { 
                             break;
-                        }
-                    }
-                    if (target != '-')
+                    } else if (target != '-')
                         break;
                 }
                 return false;

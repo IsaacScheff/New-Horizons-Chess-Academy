@@ -64,9 +64,9 @@ public class BoardManager : MonoBehaviour {
             ChessManager.Instance.OnMoveUISubmit(move);
             ClearPossibleMoves();
             return;
-        }
-
-        if(ChessManager.Instance.IsPlayerWhite == GetTile(tileName).IsPieceWhite()) {
+        } else if (_activeTile != null) {
+            ClearPossibleMoves();
+        } else if(ChessManager.Instance.IsPlayerWhite == GetTile(tileName).IsPieceWhite()) {
             Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
             ShowPossibleMoves(tileName, ChessManager.Instance.CurrentFEN); 
             _activeTile = tileName;
