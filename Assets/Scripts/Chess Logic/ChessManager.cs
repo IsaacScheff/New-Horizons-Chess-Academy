@@ -50,6 +50,12 @@ public class ChessManager : MonoBehaviour {
         if(MoveValidator.ValidateMove(move, _currentFEN)) { //should already be validated
             _currentFEN = MoveExecutor.ExecuteMove(move, _currentFEN);
             BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+            if(GameManager.Instance.SinglePlayerGame) {
+                string AIMove = AIController.Instance.GetBestMove(_currentFEN);
+                _currentFEN = MoveExecutor.ExecuteMove(AIMove, _currentFEN);
+                BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+                _playerIsWhite = !_playerIsWhite;
+            }
         } else {
             Debug.Log("Invalid move");
         }
