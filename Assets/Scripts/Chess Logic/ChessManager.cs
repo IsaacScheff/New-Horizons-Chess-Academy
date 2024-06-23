@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class ChessManager : MonoBehaviour {
     public static ChessManager Instance { get; private set; }
-    [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    //[SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1";
     public string CurrentFEN { get { return _currentFEN; } }
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;

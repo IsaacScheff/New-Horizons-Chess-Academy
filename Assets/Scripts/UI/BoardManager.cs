@@ -80,7 +80,6 @@ public class BoardManager : MonoBehaviour {
             string move = startTile + targetTileName; // Concatenate to form a move string
 
             if (MoveValidator.ValidateMove(move, fen)) {
-                // This is a valid move - you can do something with this information
                 Debug.Log("Valid move: " + move);
                 tileEntry.Value.HighlightPossibleMove();
             }

@@ -97,33 +97,55 @@ public class MoveValidator : MonoBehaviour {
                 }
                 break;
             case 'k':
-                // Check for castling
-                switch (move) {
-                    case "e1c1":
-                        if (castlingRights.Contains("K") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
-                            return true;
-                        else
-                            return false;
-                    case "e1g1":
-                        if (castlingRights.Contains("Q") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
-                            return true;
-                        else
-                            return false;
-                    case "e8c8":
-                        if (castlingRights.Contains("k") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
-                            return true;
-                        else
-                            return false;
-                    case "e8g8":
-                        if (castlingRights.Contains("q") && PathValidator.IsPathClear(startSquare, endSquare, pieces) && !CheckValidator.IsCheckAfterMove(move, fen))
-                            return true;
-                        else
-                            return false;
-                    default:
-                        break;
-                }
-                if (Math.Abs(startSquare[0] - endSquare[0]) > 1 || Math.Abs(startSquare[1] - endSquare[1]) > 1)
+                // Additional checks for castling
+                bool isCastlingMove = move == "e1g1" || move == "e1c1" || move == "e8g8" || move == "e8c8";
+                if (isCastlingMove) {
+                    // Initial checks for any castling move
+                    string currentSquare = move.Substring(0, 2) + move.Substring(0, 2);
+                    if (CheckValidator.IsCheckAfterMove(currentSquare, fen)) 
+                        return false; // Can't castle out of check
+    
+                    switch (move) {
+                        case "e1g1": // White kingside
+                            if (castlingRights.Contains("K") && 
+                                PathValidator.IsPathClear(startSquare, new int[] {endSquare[0], endSquare[1] - 1}, pieces) && // Clear path to g1
+                                !CheckValidator.IsCheckAfterMove("e1f1", fen) && // Not in check after moving to f1
+                                !CheckValidator.IsCheckAfterMove(move, fen)) { // Not in check after moving to g1
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "e1c1": // White queenside
+                            if (castlingRights.Contains("Q") &&
+                                PathValidator.IsPathClear(startSquare, new int[] {7, 0}, pieces) && //checking if path from rook to king is clear, not king to endsquare 
+                                !CheckValidator.IsCheckAfterMove("e1d1", fen) && // Not in check after moving to d1
+                                !CheckValidator.IsCheckAfterMove(move, fen)) { // Not in check after moving to c1
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "e8g8": // Black kingside
+                            if (castlingRights.Contains("k") && 
+                                PathValidator.IsPathClear(startSquare, new int[] {endSquare[0], endSquare[1] - 1}, pieces) && // Clear path to g8
+                                !CheckValidator.IsCheckAfterMove("e8f8", fen) && // Not in check after moving to f8
+                                !CheckValidator.IsCheckAfterMove(move, fen)) { // Not in check after moving to g8
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "e8c8": // Black queenside
+                            if (castlingRights.Contains("q") && 
+                                PathValidator.IsPathClear(startSquare, new int[] {0, 0}, pieces) && //checking if path from rook to king is clear, not king to endsquare 
+                                !CheckValidator.IsCheckAfterMove("e8d8", fen) && // Not in check after moving to d8
+                                !CheckValidator.IsCheckAfterMove(move, fen)) { // Not in check after moving to c8
+                                return true;
+                            } else {
+                                return false;
+                            }
+                    }
+                } else if (Math.Abs(startSquare[0] - endSquare[0]) > 1 || Math.Abs(startSquare[1] - endSquare[1]) > 1){
                     return false;
+                }
                 break;
         }
         if (!TargetCheck(endSquare, playerTurn, pieces))

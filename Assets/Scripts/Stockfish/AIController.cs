@@ -57,30 +57,6 @@ public class AIController : MonoBehaviour {
         return "";
     }
 
-    // void TestCommunicationWithStockfish() {
-    //     try {
-    //         stockfishProcess.StandardInput.WriteLine("uci");
-    //         stockfishProcess.StandardInput.WriteLine("isready");
-    //         stockfishProcess.StandardInput.WriteLine("position startpos moves e2e4 e7e5");
-    //         stockfishProcess.StandardInput.WriteLine("go depth 10");
-
-    //         while (!stockfishProcess.StandardOutput.EndOfStream) {
-    //             string outputLine = stockfishProcess.StandardOutput.ReadLine();
-    //             UnityEngine.Debug.Log(outputLine);
-    //     UnityEngine.Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
-    //             LogToFile(outputLine);
-    //             _testText.GetComponentInChildren<TextMeshProUGUI>().text = outputLine;
-    //             if (outputLine.StartsWith("bestmove")) {
-    //                 // Extract and process the best move
-    //                 break;
-    //             }
-    //         }
-    //     } catch (System.Exception ex) {
-    //         UnityEngine.Debug.LogError("Error during Stockfish communication: " + ex.Message);
-    //         LogToFile("Error during Stockfish communication: " + ex.Message);
-    //     }
-    //}
-
     void OnApplicationQuit() {
         if (stockfishProcess != null) {
             stockfishProcess.Close();
