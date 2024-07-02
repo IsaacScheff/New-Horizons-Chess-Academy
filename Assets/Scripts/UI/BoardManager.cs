@@ -51,7 +51,7 @@ public class BoardManager : MonoBehaviour {
     }
 
     public void TileClicked(string tileName) {
-        Debug.Log("Clicked on tile: " + tileName);
+        //Debug.Log("Clicked on tile: " + tileName);
         if((ChessManager.Instance.IsPlayerWhite && ChessManager.Instance.CurrentFEN.Split(' ')[1] != "w") ||
             (!ChessManager.Instance.IsPlayerWhite && ChessManager.Instance.CurrentFEN.Split(' ')[1] != "b")
         ) {
@@ -66,7 +66,7 @@ public class BoardManager : MonoBehaviour {
         } else if (_activeTile != null) {
             ClearPossibleMoves();
         } else if(ChessManager.Instance.IsPlayerWhite == GetTile(tileName).IsPieceWhite()) {
-            Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
+            //Debug.Log($"Piece on tile {GetTile(tileName).CurrentPiece}");
             ShowPossibleMoves(tileName, ChessManager.Instance.CurrentFEN); 
             _activeTile = tileName;
         } else {
@@ -80,7 +80,6 @@ public class BoardManager : MonoBehaviour {
             string move = startTile + targetTileName; // Concatenate to form a move string
 
             if (MoveValidator.ValidateMove(move, fen)) {
-                Debug.Log("Valid move: " + move);
                 tileEntry.Value.HighlightPossibleMove();
             }
         }

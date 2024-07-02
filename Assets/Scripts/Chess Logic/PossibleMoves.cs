@@ -44,7 +44,7 @@ public class PossibleMoves : MonoBehaviour {
         // Vertical moves
         for (int y = 0; y < 8; y++) {
             if (rookPosition[0] != y) {
-                move = startSquare[0].ToString() + (8 - y).ToString();
+                move = startSquare + startSquare[0].ToString() + (8 - y).ToString();
                 if (MoveValidator.ValidateMove(move, fen)) {
                     return true;
                 }
@@ -53,7 +53,7 @@ public class PossibleMoves : MonoBehaviour {
         // Horizontal moves
         for (int x = 0; x < 8; x++) {
             if (rookPosition[1] != x) {
-                move = ((char)(x + 'a')).ToString() + startSquare[1].ToString();
+                move = startSquare + ((char)(x + 'a')).ToString() + startSquare[1].ToString();
                 if (MoveValidator.ValidateMove(move, fen)) {
                     return true;
                 }
@@ -71,14 +71,14 @@ public class PossibleMoves : MonoBehaviour {
                 int fileDifference = Math.Abs(bishopPosition[0] - rank);
 
                 if (bishopPosition[1] + fileDifference < 8) {
-                    move = ((char)(bishopPosition[1] + fileDifference + 'a')).ToString() + (8 - rank).ToString();
+                    move = startSquare + ((char)(bishopPosition[1] + fileDifference + 'a')).ToString() + (8 - rank).ToString();
                     if (MoveValidator.ValidateMove(move, fen)) {
                         return true;
                     }
                 }
 
                 if (bishopPosition[1] - fileDifference >= 0) {
-                    move = ((char)(bishopPosition[1] - fileDifference + 'a')).ToString() + (8 - rank).ToString();
+                    move = startSquare + ((char)(bishopPosition[1] - fileDifference + 'a')).ToString() + (8 - rank).ToString();
                     if (MoveValidator.ValidateMove(move, fen)) {
                         return true;
                     }
@@ -120,19 +120,19 @@ public class PossibleMoves : MonoBehaviour {
 
         // Check for promotion
         if ((color == "w" && pawnPosition[0] == 1) || (color == "b" && pawnPosition[0] == 6)) {
-            move = startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -1 : 1))).ToString() + "q";
+            move = startSquare + startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -1 : 1))).ToString() + "q";
             return true; // Assuming you want to return true here, but typically would validate the move first
         }
 
         // Check if pawn can move forward one square
-        move = startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -1 : 1))).ToString();
+        move = startSquare + startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -1 : 1))).ToString();
         if (MoveValidator.ValidateMove(move, fen)) {
             return true;
         }
 
         // Check if pawn on starting square can move forward two squares
         if ((color == "w" && pawnPosition[0] == 6) || (color == "b" && pawnPosition[0] == 1)) {
-            move = startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -2 : 2))).ToString();
+            move = startSquare + startSquare[0].ToString() + (8 - (pawnPosition[0] + (color == "w" ? -2 : 2))).ToString();
             if (MoveValidator.ValidateMove(move, fen)) {
                 return true;
             }
@@ -145,7 +145,7 @@ public class PossibleMoves : MonoBehaviour {
             int targetY = pawnPosition[0] + (color == "w" ? -1 : 1);
 
             if (MoveValidator.IsSquareOnBoard(targetX, targetY)) {
-                move = ((char)(targetX + 'a')).ToString() + (8 - targetY).ToString();
+                move = startSquare + ((char)(targetX + 'a')).ToString() + (8 - targetY).ToString();
                 if (MoveValidator.ValidateMove(move, fen)) {
                     return true;
                 }

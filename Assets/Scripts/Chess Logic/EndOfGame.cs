@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -86,6 +87,63 @@ public class EndOfGame : MonoBehaviour {
 
         return false;
     }
+    // public static bool LegalMove(string fen) {
+    //     var parts = fen.Split(' ');
+    //     var boardState = Converters.FenToBoard(parts[0]);
+    //     var color = parts[1];
+
+    //     for (int i = 0; i < boardState.GetLength(0); i++) {
+    //         for (int j = 0; j < boardState[i].Length; j++) {
+    //             char piece = boardState[i][j];
+    //             if ((color == "w" && char.IsUpper(piece)) || (color == "b" && char.IsLower(piece))) {
+    //                 string startSquare = Converters.ArrayToSquare(i, j);
+                    
+    //                 switch (piece.ToString().ToLower()) {
+    //                     case "k":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidKingMove))
+    //                             return true;
+    //                         break;
+    //                     case "q":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidRookMove) 
+    //                         || CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidBishopMove))
+    //                             return true;
+    //                         break;
+    //                     case "r":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidRookMove))
+    //                             return true;
+    //                         break;
+    //                     case "n":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidKnightMove))
+    //                             return true;
+    //                         break;
+    //                     case "b":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidBishopMove))
+    //                             return true;
+    //                         break;
+    //                     case "p":
+    //                         if (CheckPossibleMoves(startSquare, piece, fen, PossibleMoves.ValidPawnMove))
+    //                             return true;
+    //                         break;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // private static bool CheckPossibleMoves(string startSquare, char piece, string fen, Func<string, string, bool> validateMoveFunc) {
+    //     for (int i = 0; i < 8; i++) {
+    //         for (int j = 0; j < 8; j++) {
+    //             string endSquare = Converters.ArrayToSquare(i, j);
+    //             string move = startSquare + endSquare;
+    //             if (validateMoveFunc(move, fen)) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
     public static bool LegalMove(string fen) {
         var parts = fen.Split(' ');
         var boardState = Converters.FenToBoard(parts[0]);

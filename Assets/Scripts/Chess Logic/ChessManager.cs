@@ -9,6 +9,7 @@ public class ChessManager : MonoBehaviour {
     public static ChessManager Instance { get; private set; }
     //[SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1";
+    public List<string> previousBoards; 
     public string CurrentFEN { get { return _currentFEN; } }
     [SerializeField] private GameObject _textBoard;
     [SerializeField] private TMP_InputField _moveInput;
@@ -49,16 +50,30 @@ public class ChessManager : MonoBehaviour {
             _playerIsWhite = !_playerIsWhite;
         }
         if(MoveValidator.ValidateMove(move, _currentFEN)) { //should already be validated
+            previousBoards.Add(_currentFEN);
             _currentFEN = MoveExecutor.ExecuteMove(move, _currentFEN);
             BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+            //check for end of game
+            HandleEndOfGame();
             if(GameManager.Instance.SinglePlayerGame) {
-                string AIMove = AIController.Instance.GetBestMove(_currentFEN);
-                _currentFEN = MoveExecutor.ExecuteMove(AIMove, _currentFEN);
-                BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
-                _playerIsWhite = !_playerIsWhite;
+                MakeAIMove();
+                //check for end of game
+                HandleEndOfGame();
             }
         } else {
             Debug.Log("Invalid move");
         }
+    }
+
+    public void MakeAIMove() {
+        string AIMove = AIController.Instance.GetBestMove(_currentFEN);
+        previousBoards.Add(_currentFEN);
+        _currentFEN = MoveExecutor.ExecuteMove(AIMove, _currentFEN);
+        BoardManager.Instance.UpdateBoardFromFen(_currentFEN.Split(' ')[0]);
+        _playerIsWhite = !_playerIsWhite;
+    }
+
+    public void HandleEndOfGame() {
+        Debug.Log(EndOfGame.IsGameOver(_currentFEN, previousBoards)); 
     }
 }

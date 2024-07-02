@@ -42,8 +42,8 @@ public class StockfishTest : MonoBehaviour {
 
             while (!stockfishProcess.StandardOutput.EndOfStream) {
                 string outputLine = stockfishProcess.StandardOutput.ReadLine();
-                UnityEngine.Debug.Log(outputLine);
-        UnityEngine.Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
+                //UnityEngine.Debug.Log(outputLine);
+            //UnityEngine.Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
                 LogToFile(outputLine);
                 _testText.GetComponentInChildren<TextMeshProUGUI>().text = outputLine;
                 if (outputLine.StartsWith("bestmove")) {
