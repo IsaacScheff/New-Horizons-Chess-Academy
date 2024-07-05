@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startGameButton: {fileID: 961509565}
+  gameData: {fileID: 11400000, guid: e40b6e2df81f046f4a8a404da33169a9, type: 2}
 --- !u!4 &392214021
 Transform:
   m_ObjectHideFlags: 0

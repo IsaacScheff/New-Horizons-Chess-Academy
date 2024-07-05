@@ -289,7 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c092ee55c491462fbcf24e917d30110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: e40b6e2df81f046f4a8a404da33169a9, type: 2}
   _currentFEN: rnbqkbn1/pppppppp/8/8/8/5r2/P6P/RN2K2R w KQq - 0 1
+  previousBoards: []
   _textBoard: {fileID: 1700355455}
   _moveInput: {fileID: 1665577758}
   _playerIsWhite: 0

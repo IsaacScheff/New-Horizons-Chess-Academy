@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class ChessManager : MonoBehaviour {
     public static ChessManager Instance { get; private set; }
+    public GameData gameData;
     //[SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    [SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1";
+    //[SerializeField] private string _currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1";
+    [SerializeField] private string _currentFEN; 
     public List<string> previousBoards; 
     public string CurrentFEN { get { return _currentFEN; } }
     [SerializeField] private GameObject _textBoard;
@@ -23,6 +25,8 @@ public class ChessManager : MonoBehaviour {
         //_boardText = _textBoard.GetComponent<TextMeshProUGUI>();
         //_boardText.text = Converters.BoardToString(Converters.FenToBoard(_currentFEN.Split(' ')[0]));
         //Debug.Log("_boardText: " + _boardText.text);
+
+        _currentFEN = gameData.currentFEN;
     }
     void Update() {
         // Check if the input field is currently selected and the Enter key is pressed
@@ -43,6 +47,9 @@ public class ChessManager : MonoBehaviour {
         } else {
             Debug.Log("Invalid move");
         }
+    }
+    public void SetCurrentFEN(string fen) {
+        _currentFEN = fen;
     }
     //these functions will be largely the same, will refactor later
     public void OnMoveUISubmit(string move) {
